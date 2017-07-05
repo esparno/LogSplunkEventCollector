@@ -6,18 +6,20 @@ import (
 	"fmt"
 	"net/http"
 	"time"
+	"os"
 )
 
 func LogToSplunk(url string, port int, event *Event, token string, timeout time.Duration) (*http.Response, error) {
 	logUrl := fmt.Sprintf("%s:%d/services/collector/event", url, port)
 	byteSlice, err := json.Marshal(&event)
 	if err != nil {
-		panic(err)
+		fmt.Fprintf(os.Stderr, "error: %v\n", err)
+		os.Exit(1)
 	}
 	req, err := http.NewRequest("POST", logUrl, bytes.NewBuffer(byteSlice))
 	if err != nil {
-		panic(err)
-		system.ex
+		fmt.Fprintf(os.Stderr, "error: %v\n", err)
+		os.Exit(1)
 	}
 	header := http.Header{}
 	header.Add("Authorization", fmt.Sprintf("Splunk %s", token))
