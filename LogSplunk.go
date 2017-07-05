@@ -8,15 +8,15 @@ import (
 	"os"
 	"time"
 )
-
+// LogToSplunk will log to Splunk Event Collector
 func LogToSplunk(url string, port int, event *Event, token string, timeout time.Duration) (*http.Response, error) {
-	logUrl := fmt.Sprintf("%s:%d/services/collector/event", url, port)
+	logURL := fmt.Sprintf("%s:%d/services/collector/event", url, port)
 	byteSlice, err := json.Marshal(&event)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "error: %v\n", err)
 		os.Exit(1)
 	}
-	req, err := http.NewRequest("POST", logUrl, bytes.NewBuffer(byteSlice))
+	req, err := http.NewRequest("POST", logURL, bytes.NewBuffer(byteSlice))
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "error: %v\n", err)
 		os.Exit(1)
@@ -30,6 +30,7 @@ func LogToSplunk(url string, port int, event *Event, token string, timeout time.
 	return resp, err
 }
 
+// Event represents object sent in http request to Splunk
 type Event struct {
 	Host         string      `json:"host"`
 	Time         int         `json:"time"`
