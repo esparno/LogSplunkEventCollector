@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"time"
 	"os"
+	"time"
 )
 
 func LogToSplunk(url string, port int, event *Event, token string, timeout time.Duration) (*http.Response, error) {
@@ -32,8 +32,8 @@ func LogToSplunk(url string, port int, event *Event, token string, timeout time.
 
 type Event struct {
 	Host         string      `json:"host"`
-	Time         int	     `json:"time"`
-	Source 		 string		 `json:"source"`
+	Time         int         `json:"time"`
+	Source       string      `json:"source"`
 	SourceType   string      `json:"sourcetype"`
 	Index        string      `json:"index"`
 	EventMessage interface{} `json:"event"`
