@@ -17,6 +17,7 @@ func LogToSplunk(url string, port int, event *Event, token string, timeout time.
 	req, err := http.NewRequest("POST", logUrl, bytes.NewBuffer(byteSlice))
 	if err != nil {
 		panic(err)
+		system.ex
 	}
 	header := http.Header{}
 	header.Add("Authorization", fmt.Sprintf("Splunk %s", token))
