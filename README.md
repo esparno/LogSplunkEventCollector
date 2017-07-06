@@ -1,5 +1,5 @@
 # LogSplunkEventCollector
-Library containing simple function for logging to Splunk Event Collector
+Simple function for logging to Splunk Event Collector
 
 ## Example Code
 ```
